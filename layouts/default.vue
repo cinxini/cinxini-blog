@@ -9,7 +9,7 @@
         <v-btn nuxt to="/about">
           About
         </v-btn>
-        <v-btn nuxt to="/blog">
+        <v-btn nuxt to="/posts">
           Blog
         </v-btn>
         <v-btn icon="fa-solid fa-magnifying-glass"></v-btn>
