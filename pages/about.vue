@@ -1,13 +1,11 @@
 <template>
   <v-container class="w-50">
-    <h1>
-      About Me
-    </h1>
+    <SectionTitle title="About Me" icon="fa-regular fa-face-grin-wink" />
   </v-container>
 </template>
 
-<script lang="ts" setup>
-
+<script setup>
+import SectionTitle from '@/components/display/SectionTitle.vue';
 </script>
 
 <style></style>
