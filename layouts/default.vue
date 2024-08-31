@@ -16,7 +16,6 @@
       </template>
     </v-app-bar>
     <v-main>
-      <p>This is a default layout page.</p>
       <slot />
     </v-main>
 

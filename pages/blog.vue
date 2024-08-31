@@ -1,7 +1,9 @@
 <template>
-  <div>
-    blog posts
-  </div>
+  <v-container class="w-50">
+    <h1>
+      Recent Blog Posts
+    </h1>
+  </v-container>
 </template>
 
 <script lang="ts" setup>

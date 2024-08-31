@@ -1,7 +1,9 @@
 <template>
-  <div>
-    about page
-  </div>
+  <v-container class="w-50">
+    <h1>
+      About Me
+    </h1>
+  </v-container>
 </template>
 
 <script lang="ts" setup>
