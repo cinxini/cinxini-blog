@@ -1,0 +1,30 @@
+{
+    "dark": false,
+    "colors": {
+        "background": "#FFFFFF",
+        "surface": "#FFFFFF",
+        "surface-bright": "#FFFFFF",
+        "surface-light": "#EEEEEE",
+        "surface-variant": "#424242",
+        "on-surface-variant": "#EEEEEE",
+        "base": "#b1b1b1",
+        "baseVariant": "#464646",
+        "surfaceTint": "#3B656B",
+        "primary": "#82C0D9",
+        "onPrimary": "#FFFFFF",
+        "primaryContainer": "#C2E5F2",
+        "onPrimaryContainer": "#1C474D",
+        "secondary": "#F2A7BB",
+        "onSecondary": "#FFFFFF",
+        "secondaryContainer": "#F2D5DD",
+        "onSecondaryContainer": "#3E4D50",
+        "tertiary": "#A19DCA",
+        "onTertiary": "#FFFFFF",
+        "tertiaryContainer": "#D1CFE8",
+        "onTertiaryContainer": "#483C5A",
+        "error": "#B00020",
+        "info": "#2196F3",
+        "success": "#4CAF50",
+        "warning": "#FB8C00"
+    }
+}
