@@ -33,6 +33,21 @@ const navItems = [
   --heading-border-opacity: 0.3;
 }
 
+/* font */
+.poppins {
+  font-family: "Poppins", sans-serif;
+}
+
+head {
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
 #navbar {
   border-bottom: 1px solid rgba(var(--v-theme-base), var(--heading-border-opacity));
 }
