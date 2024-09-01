@@ -16,8 +16,6 @@
         <div class="text-h6 text-primary font-weight-bold text-center">{{ aboutMe.name }}</div>
         <div class="text-caption text-grey font-weight-medium my-1 text-center mt-0">{{ aboutMe.shortBio }}</div>
       </div>
-
-      <!-- Social Buttons -->
       <p class="d-flex flex-row ga-3 my-3">
         <v-btn v-if="aboutMe.social.medium" class="social__bttn" icon="fa-brands fa-medium" size="small"
           :href="aboutMe.social.medium" target="_blank" />
