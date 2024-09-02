@@ -1,5 +1,5 @@
 <template>
-  <v-container class="w-50">
+  <v-container id="main-content" :width="containerWidth">
     <SectionTitle title="Recent Blog Posts" icon="fa-solid fa-quote-right" />
 
     <div class="d-flex flex-column ga-3">
@@ -16,6 +16,11 @@
 
 <script setup>
 import SectionTitle from '@/components/display/SectionTitle.vue';
+import { useResponsiveContainer } from '@/composables/display';
+import { useDisplay } from 'vuetify';
+
+const { name } = useDisplay()
+const { width: containerWidth } = useResponsiveContainer(name);
 
 const { data: posts, refresh } = await useAsyncData('blogPostList', () => {
   return queryContent('/blog')
