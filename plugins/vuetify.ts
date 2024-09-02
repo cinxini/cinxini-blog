@@ -10,6 +10,7 @@ console.log(candyTheme)
 export default defineNuxtPlugin((nuxtApp) => {
     const vuetify = createVuetify({
         // ... your configuration
+        ssr: true,
         theme: {
           defaultTheme: 'candyTheme',
           themes: {
