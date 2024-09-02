@@ -4,6 +4,7 @@ description: 'meta description of the page'
 author: 'cinxini'
 dates:
     published: "2024-08-31"
+cover: "/images/blog/sample-cover.png"
 draft: false
 category: webdev
 featured: false

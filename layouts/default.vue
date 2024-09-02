@@ -19,7 +19,6 @@ const navItems = [
         <v-img :width="120" aspect-ratio="16/9" cover src="@/assets/images/logo.png"></v-img>
       </template>
       <template v-slot:append>
-        <!-- <div v-if="isMobile"></div> -->
         <v-toolbar-items v-if="smAndUp">
           <v-btn v-for="item in navItems" :key="item.path" nuxt class="nav-btn ma-1" color="base" active-color="primary"
             rounded="lg" :to="item.path">
