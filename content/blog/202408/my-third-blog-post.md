@@ -1,9 +1,10 @@
 ---
 title: 'My third blog post.'
-description: 'meta description of the page'
+description: 'meta description of the page. meta description of the page. meta description of the page. meta description of the page. meta description of the page. meta description of the page meta description of the page meta description of the page meta description of the page meta description of the page'
 author: 'cinxini'
 dates:
     published: "2024-09-02"
+cover:
 draft: false
 category: datasci
 featured: false

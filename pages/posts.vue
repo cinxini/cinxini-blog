@@ -2,19 +2,13 @@
   <v-container id="main-content" :width="containerWidth">
     <SectionTitle title="Recent Blog Posts" icon="fa-solid fa-quote-right" />
 
-    <div class="d-flex flex-column ga-3">
-      <v-card v-for="post in posts" :key="post._path">
-        <v-card-title>
-          <NuxtLink :to="post._path">{{ post.title }}</NuxtLink>
-        </v-card-title>
-        <v-card-text>{{ post.description }}</v-card-text>
-      </v-card>
-    </div>
+    <ContentList :articles="posts" class="my-5" />
 
   </v-container>
 </template>
 
 <script setup>
+import ContentList from '@/components/containers/ContentList.vue';
 import SectionTitle from '@/components/display/SectionTitle.vue';
 import { useResponsiveContainer } from '@/composables/display';
 import { useDisplay } from 'vuetify';
