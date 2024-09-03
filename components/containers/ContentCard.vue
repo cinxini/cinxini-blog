@@ -14,8 +14,8 @@
         <MetaTop :category="content.category" :date="content.dates.published" />
 
         <!-- Meta Body -->
-        <p class="text-h4">{{ content.title }}</p>
-        <p class="text-body">{{ content.description }}</p>
+        <p class="meta-title">{{ content.title }}</p>
+        <p class="text-body-2 meta-description">{{ content.description }}</p>
 
         <!-- Meta Tags -->
         <MetaTags :tags="content.tags" />
@@ -43,4 +43,21 @@ const coverImg = computed(() => {
 })
 </script>
 
-<style></style>
+<style scoped>
+.meta-title {
+  font-size: 1.5rem;
+  font-weight: 500;
+  line-height: 1.333;
+  letter-spacing: normal;
+  color: rgb(var(--v-theme-primary));
+  font-family: "Poppins", sans-serif;
+}
+
+.meta-description {
+  font-family: "Poppins", sans-serif;
+  font-size: 0.875rem !important;
+  font-weight: 400;
+  line-height: 1.425;
+  letter-spacing: 0.0178571429em !important;
+}
+</style>
