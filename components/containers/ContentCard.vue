@@ -19,9 +19,8 @@
         <p>
           <NuxtLink class="meta-title" :to="content._path">{{ content.title }}</NuxtLink>
         </p>
-        <p class="text-body-2 meta-description">
-          {{ content.description }}
-          <!-- {{ content.description.length > 200 ? content.description.slice(0, 250) + '...' : content.description }} -->
+        <p v-if="showDescription" class="text-body-2 meta-description">
+          {{ content.description.length > descriptionCharMax ? content.description.slice(0, descriptionCharMax) + '...' : content.description }}
         </p>
 
         <!-- Meta Tags -->
@@ -33,13 +32,16 @@
 
 <script setup>
 import { useResponsiveContainer } from '@/composables/display';
+import { computed } from 'vue';
 import { useDisplay } from 'vuetify';
 
 
 import MetaTags from '@/components/containers/MetaTags.vue';
 import MetaTop from '@/components/containers/MetaTop.vue';
+
 const { name } = useDisplay()
-const { coverImgWidth } = useResponsiveContainer(name);
+const { coverImgWidth, descriptionCharMax } = useResponsiveContainer(name);
+
 const props = defineProps({
   content: {
     type: Object,
@@ -53,6 +55,10 @@ const coverImg = computed(() => {
   } else {
     return `/images/blog/default-cover.png`;
   }
+})
+
+const showDescription = computed(() => {
+  return descriptionCharMax.value > 0 ? true : false;
 })
 </script>
 
