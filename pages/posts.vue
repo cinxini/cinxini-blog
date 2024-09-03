@@ -1,7 +1,13 @@
 <template>
   <v-container id="main-content" :width="containerWidth">
     <SectionTitle title="Recent Blog Posts" icon="fa-solid fa-quote-right" />
-    <ContentList :articles="posts" class="mt-10" />
+    <ContentQuery path="/blog" v-slot="{ data }" :where="{ draft: false }" :sort="{ 'dates.published': -1 }" :limit="2"
+      :skip="skip">
+      <!-- <pre>{{ data }}</pre> -->
+      <!-- <ContentRenderer :value="data" /> -->
+      <ContentList :articles="data" class="mt-10" />
+    </ContentQuery>
+    <!-- <ContentList :articles="posts" class="mt-10" /> -->
     <v-pagination :length="numPages" v-model="currPage" next-icon="fa-solid fa-caret-right"
       prev-icon="fa-solid fa-caret-left" rounded="lg" color="base" active-color="primary"
       @input="gotoPage(currPage)"></v-pagination>
@@ -9,9 +15,7 @@
 </template>
 
 <script setup>
-definePageMeta({
-  documentDriven: false
-})
+
 import ContentList from '@/components/containers/ContentList.vue';
 import SectionTitle from '@/components/display/SectionTitle.vue';
 import { useNuxtDisplay } from '@/composables/nuxtDisplay';
@@ -32,7 +36,11 @@ const fetchPosts = async (pageNo) => {
     .find()
 }
 
+const skip = computed(() => {
+  return (currPage.value - 1) * appConfig.maxPostPerPage
+})
 const { data: posts } = await useAsyncData('blogPostList', async () => {
+  console.log('call')
   return fetchPosts(currPage.value);
 })
 
@@ -49,10 +57,7 @@ const numPages = computed(() => {
 
 watch(currPage, async (newPage) => {
   console.log(newPage)
-  const data = await fetchPosts(newPage);
-  console.log(data)
-  posts.value = data
-  console.log(data)
+  await navigateTo('/posts?page=' + newPage)
 })
 
 const gotoPage = async (pageNo) => {
