@@ -10,7 +10,7 @@
     <!-- <ContentList :articles="posts" class="mt-10" /> -->
     <v-pagination :length="numPages" v-model="currPage" next-icon="fa-solid fa-caret-right"
       prev-icon="fa-solid fa-caret-left" rounded="lg" color="base" active-color="primary"
-      @input="gotoPage(currPage)"></v-pagination>
+      "></v-pagination>
   </v-container>
 </template>
 
@@ -25,7 +25,7 @@ const appConfig = useAppConfig()
 const route = useRoute()
 console.log(route)
 const { width: containerWidth } = useNuxtDisplay(viewport.breakpoint);
-const currPage = ref(1);
+const currPage = ref(route.query.page? Number(route.query.page): 1);
 
 const fetchPosts = async (pageNo) => {
   return queryContent('/blog')
@@ -57,7 +57,7 @@ const numPages = computed(() => {
 
 watch(currPage, async (newPage) => {
   console.log(newPage)
-  await navigateTo('/posts?page=' + newPage)
+  await navigateTo('cinxini.com/posts?page=' + newPage)
 })
 
 const gotoPage = async (pageNo) => {
