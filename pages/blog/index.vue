@@ -2,9 +2,12 @@
   <v-container id="main-content" :width="containerWidth">
     <SectionTitle title="Recent Blog Posts" icon="fa-solid fa-quote-right" />
     <ContentList :articles="posts" class="mt-10" />
-    <v-pagination nuxt :length="numPages" v-model="currPage" next-icon="fa-solid fa-caret-right"
+    <div class="d-flex flex-row ga-2">
+      <NuxtLink v-for="i in numPages" :to="`/blog/page/i`">{{ i }}</NuxtLink>
+    </div>
+    <!-- <v-pagination :length="numPages" v-model="currPage" next-icon="fa-solid fa-caret-right"
       prev-icon="fa-solid fa-caret-left" rounded="lg" color="base" active-color="primary" :previous="refresh()"
-      :next="refresh()"></v-pagination>
+      :next="route.push({ path: '/blog/page/1' })"></v-pagination> -->
   </v-container>
 </template>
 
@@ -17,7 +20,7 @@ import { computed, ref } from 'vue';
 const viewport = useViewport()
 const appConfig = useAppConfig()
 const route = useRoute()
-
+console.log(route.params)
 const { width: containerWidth } = useNuxtDisplay(viewport.breakpoint);
 const currPage = ref(route.query.page ? Number(route.query.page) : 1);
 
@@ -48,6 +51,8 @@ const numPages = computed(() => {
   if (numPosts.value === 0 || numPosts.value < appConfig.maxPostPerPag) return 1;
   return Math.ceil(numPosts.value / appConfig.maxPostPerPage);
 })
+
+
 </script>
 
 <style></style>
