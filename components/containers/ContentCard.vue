@@ -1,10 +1,12 @@
 <template>
   <v-card :key="content._path">
     <div class="d-flex flex-row flex-nowrap">
-      <div style="max-width: 120px; min-width: 120px;" class="position-static">
-        <v-img class="position-absolute top-0" :src="coverImg" cover max-width="120" min-width="120">
+      <div :style="{ 'max-width': coverImgWidth + 'px', 'min-width': coverImgWidth + 'px' }" class="position-static">
+        <v-img class="position-absolute top-0" :src="coverImg" cover :max-width="coverImgWidth"
+          :min-width="coverImgWidth">
           <template v-slot:error>
-            <v-img class="mx-auto" max-width="120" min-width="120" :src="`/images/blog/default-cover.png`"></v-img>
+            <v-img class="mx-auto" :max-width="coverImgWidth" :min-width="coverImgWidth"
+              :src="`/images/blog/default-cover.png`"></v-img>
           </template>
         </v-img>
       </div>
@@ -14,8 +16,13 @@
         <MetaTop :category="content.category" :date="content.dates.published" />
 
         <!-- Meta Body -->
-        <p class="meta-title">{{ content.title }}</p>
-        <p class="text-body-2 meta-description">{{ content.description }}</p>
+        <p>
+          <NuxtLink class="meta-title" :to="content._path">{{ content.title }}</NuxtLink>
+        </p>
+        <p class="text-body-2 meta-description">
+          {{ content.description }}
+          <!-- {{ content.description.length > 200 ? content.description.slice(0, 250) + '...' : content.description }} -->
+        </p>
 
         <!-- Meta Tags -->
         <MetaTags :tags="content.tags" />
@@ -25,8 +32,14 @@
 </template>
 
 <script setup>
+import { useResponsiveContainer } from '@/composables/display';
+import { useDisplay } from 'vuetify';
+
+
 import MetaTags from '@/components/containers/MetaTags.vue';
 import MetaTop from '@/components/containers/MetaTop.vue';
+const { name } = useDisplay()
+const { coverImgWidth } = useResponsiveContainer(name);
 const props = defineProps({
   content: {
     type: Object,
@@ -51,7 +64,14 @@ const coverImg = computed(() => {
   letter-spacing: normal;
   color: rgb(var(--v-theme-primary));
   font-family: "Poppins", sans-serif;
+
 }
+
+.meta-title:hover {
+  text-decoration: underline solid rgba(var(--v-theme-primary), 0.2) 4px;
+  color: rgba(var(--v-theme-primary), 0.8);
+}
+
 
 .meta-description {
   font-family: "Poppins", sans-serif;
