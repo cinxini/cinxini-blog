@@ -86,6 +86,10 @@ body {
   text-transform: uppercase;
 }
 
+#main-content {
+  padding-top: 30px;
+}
+
 #main-content.w-95 {
   width: 95%;
 }

@@ -1,8 +1,7 @@
 <template>
   <v-container id="main-content" :width="containerWidth">
     <SectionTitle title="Recent Blog Posts" icon="fa-solid fa-quote-right" />
-
-    <ContentList :articles="posts" class="my-5" />
+    <ContentList :articles="posts" class="mt-10" />
 
   </v-container>
 </template>
