@@ -8,24 +8,34 @@
 </template>
 
 <script setup>
-
+import { callWithNuxt } from '#app';
 import ContentList from '@/components/containers/ContentList.vue';
 import SectionTitle from '@/components/display/SectionTitle.vue';
 import { useNuxtDisplay } from '@/composables/nuxtDisplay';
 import { computed, ref, watch } from 'vue';
 const viewport = useViewport()
 const appConfig = useAppConfig()
+const nuxtApp = useNuxtApp();
 
 const { width: containerWidth } = useNuxtDisplay(viewport.breakpoint);
 const currPage = ref(1);
 
-const { data: posts, refresh } = await useAsyncData('blogPostList', () => {
-  return queryContent('/blog')
-    .where({ draft: false })
-    .sort({ 'dates.published': -1 })
-    .skip((currPage.value - 1) * appConfig.maxPostPerPage)
-    .limit(appConfig.maxPostPerPage)
-    .find()
+const { data: posts, refresh } = await useAsyncData('blogPostList', async () => {
+  async function fetch() {
+    return await queryContent('/blog')
+      .where({ draft: false })
+      .sort({ 'dates.published': -1 })
+      .skip((currPage.value - 1) * appConfig.maxPostPerPage)
+      .limit(appConfig.maxPostPerPage)
+      .find()
+  }
+  return callWithNuxt(nuxtApp, fetch);
+  // return queryContent('/blog')
+  //   .where({ draft: false })
+  //   .sort({ 'dates.published': -1 })
+  //   .skip((currPage.value - 1) * appConfig.maxPostPerPage)
+  //   .limit(appConfig.maxPostPerPage)
+  //   .find()
 })
 
 const { data: numPosts } = await useAsyncData('blogPostCount', () => {
