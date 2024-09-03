@@ -9,6 +9,9 @@
 </template>
 
 <script setup>
+definePageMeta({
+  documentDriven: false
+})
 import ContentList from '@/components/containers/ContentList.vue';
 import SectionTitle from '@/components/display/SectionTitle.vue';
 import { useNuxtDisplay } from '@/composables/nuxtDisplay';
@@ -47,6 +50,7 @@ const numPages = computed(() => {
 watch(currPage, async (newPage) => {
   console.log(newPage)
   const data = await fetchPosts(newPage);
+  console.log(data)
   posts.value = data
   console.log(data)
 })
