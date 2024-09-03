@@ -26,7 +26,7 @@
         <!-- Meta Tags -->
         <div class="d-flex flex-row justify-space-between">
           <MetaTags :tags="content.tags" />
-          <HoverButton v-if="smAndUp" title="Read More" :to="content._path" />
+          <HoverButton v-if="showReadMore" title="Read More" :to="content._path" />
         </div>
 
       </div>
@@ -36,15 +36,18 @@
 
 <script setup>
 import HoverButton from '@/components/containers/HoverButton.vue';
-import { useResponsiveContainer } from '@/composables/display';
 import { computed } from 'vue';
-import { useDisplay } from 'vuetify';
 
 import MetaTags from '@/components/containers/MetaTags.vue';
 import MetaTop from '@/components/containers/MetaTop.vue';
 
-const { name, smAndUp } = useDisplay()
-const { coverImgWidth, descriptionCharMax } = useResponsiveContainer(name);
+const viewport = useViewport()
+const { coverImgWidth, descriptionCharMax } = useNuxtDisplay(viewport.breakpoint);
+
+const showReadMore = computed(() => {
+  console.log('viewport.isGreaterOrEquals tablet', viewport.isGreaterOrEquals('tablet'))
+  return viewport.isGreaterOrEquals('tablet');
+})
 
 const props = defineProps({
   content: {

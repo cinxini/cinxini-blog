@@ -28,7 +28,7 @@ export default defineNuxtConfig({
       config.plugins.push(vuetify({ autoImport: true }))
     })
   
-  },'@nuxt/image','@nuxt/content'],
+  },'@nuxt/image', 'nuxt-viewport','@nuxt/content'],
 
   routeRules: {
     '/': { prerender: true }

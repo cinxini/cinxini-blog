@@ -8,16 +8,15 @@
 </template>
 
 <script setup>
+
 import ContentList from '@/components/containers/ContentList.vue';
 import SectionTitle from '@/components/display/SectionTitle.vue';
-import { useResponsiveContainer } from '@/composables/display';
+import { useNuxtDisplay } from '@/composables/nuxtDisplay';
 import { computed, ref, watch } from 'vue';
-import { useDisplay } from 'vuetify';
-
+const viewport = useViewport()
 const appConfig = useAppConfig()
-const { name } = useDisplay()
-const { width: containerWidth } = useResponsiveContainer(name);
 
+const { width: containerWidth } = useNuxtDisplay(viewport.breakpoint);
 const currPage = ref(1);
 
 const { data: posts, refresh } = await useAsyncData('blogPostList', () => {
