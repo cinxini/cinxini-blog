@@ -27,14 +27,6 @@
         <div class="d-flex flex-row justify-space-between">
           <MetaTags :tags="content.tags" />
           <HoverButton v-if="smAndUp" title="Read More" :to="content._path" />
-          <!-- <v-hover>
-            <template v-slot:default="{ isHovering, props }">
-              <v-btn nuxt v-bind="props" variant="tonal" :color="isHovering ? 'primary' : 'base'" class="mybutton"
-                density="comfortable" width="150" :to="content._path">
-                Read More
-              </v-btn>
-            </template>
-          </v-hover> -->
         </div>
 
       </div>
