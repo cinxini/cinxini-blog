@@ -1,9 +1,14 @@
 <template>
   <div>
-    <pre>{{ route.path }}</pre>
     <ContentList :articles="posts" class="mt-10" />
-    <div class="d-flex flex-row ga-2">
-      <NuxtLink v-for="i in numPages" :to="`/blog/page/${i}`">{{ i }}</NuxtLink>
+    <div class="d-flex flex-row ga-3 justify-center align-center mt-5">
+      <v-btn nuxt variant="plain" icon="fa-solid fa-caret-left" color="base" density="compact"
+        :disabled="page === 1 ? true : false" :to="`/blog/page/${page - 1}`"></v-btn>
+
+      <v-btn nuxt v-for="i in numPages" :to="`/blog/page/${i}`" min-width="10" variant="text"
+        :color="i === page ? 'primary' : 'base'" rounded="lg" class="pagination my-0">{{ i }}</v-btn>
+      <v-btn nuxt variant="plain" icon="fa-solid fa-caret-right" color="base" density="compact"
+        :disabled="page === numPages ? true : false" :to="`/blog/page/${page + 1}`"></v-btn>
     </div>
   </div>
 </template>
@@ -40,6 +45,14 @@ const numPages = computed(() => {
   return Math.ceil(numPosts.value / appConfig.maxPostPerPage);
 })
 console.log('numPages', numPages.value)
+
+const prevPage = () => {
+
+}
 </script>
 
-<style></style>
+<style scoped>
+.pagination:hover {
+  color: red;
+}
+</style>
