@@ -69,7 +69,7 @@ const showDescription = computed(() => {
 })
 </script>
 
-<style scoped>
+<style>
 .meta-title {
   font-size: 1.5rem;
   font-weight: 500;
