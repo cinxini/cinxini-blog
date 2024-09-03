@@ -27,7 +27,8 @@ export default defineNuxtConfig({
       // @ts-expect-error
       config.plugins.push(vuetify({ autoImport: true }))
     })
-  },'@nuxt/content'],
+  
+  },'@nuxt/image', 'nuxt-viewport','@nuxt/content'],
 
   routeRules: {
     '/': { prerender: true }
