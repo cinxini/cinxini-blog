@@ -56,6 +56,7 @@ export function useResponsiveContainer(name) {
     }
 
     watchEffect(() => {
+        console.log(toValue(name));
         width.value = getContainerWidth(toValue(name));
         coverImgWidth.value = getConverImgWidth(toValue(name));
         descriptionCharMax.value = getDescriptionCharMax(toValue(name));
