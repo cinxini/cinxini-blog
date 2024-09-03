@@ -33,11 +33,6 @@ export default defineNuxtConfig({
   routeRules: {
     '/': { prerender: true },
   },
-    router: {
-    options: {
-      strict: true,
-    },
-  },
 
   compatibilityDate: '2024-08-31',
 
