@@ -31,7 +31,8 @@ export default defineNuxtConfig({
   },'@nuxt/image', 'nuxt-viewport','@nuxt/content'],
 
   routeRules: {
-    '/': { prerender: true }
+    '/': { prerender: true },
+    '/blog/***': {prerender: true}
   },
 
   compatibilityDate: '2024-08-31',
