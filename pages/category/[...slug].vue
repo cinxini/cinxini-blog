@@ -1,6 +1,6 @@
 <template>
   <div>
-    
+    <h1>Catagory page</h1>
   </div>
 </template>
 
@@ -8,6 +8,4 @@
 
 </script>
 
-<style>
-
-</style>
+<style></style>
