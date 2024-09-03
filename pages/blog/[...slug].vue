@@ -1,5 +1,9 @@
 <template>
-  <main>
+  <MainContainer>
     <ContentDoc />
-  </main>
+  </MainContainer>
 </template>
+
+<script setup>
+import MainContainer from '@/components/containers/MainContaienr.vue';
+</script>

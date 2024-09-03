@@ -1,19 +1,14 @@
 <template>
-  <v-container id="main-content" :width="containerWidth" class="w-60">
+  <MainContainer>
     <SectionTitle title="Recent Blog Posts" icon="fa-solid fa-quote-right" />
     <ContentSection></ContentSection>
-  </v-container>
+  </MainContainer>
 </template>
 
 <script setup>
 import ContentSection from '@/components/containers/ContentListSection.vue';
+import MainContainer from '@/components/containers/MainContaienr.vue';
 import SectionTitle from '@/components/display/SectionTitle.vue';
-import { useNuxtDisplay } from '@/composables/nuxtDisplay';
-
-
-const viewport = useViewport()
-const { width: containerWidth } = useNuxtDisplay(viewport.breakpoint);
-
 </script>
 
 <style></style>
