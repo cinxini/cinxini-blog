@@ -3,11 +3,10 @@ import { useDisplay } from 'vuetify';
 
 const { smAndUp } = useDisplay()
 
-console.log
 const navItems = [
   { title: 'Home', path: '/', icon: 'fa-solid fa-house' },
   { title: 'About', path: '/about', icon: 'fa-regular fa-face-grin-wink' },
-  { title: 'Blog', path: '/posts', icon: 'fa-solid fa-quote-right' },
+  { title: 'Blog', path: '/blog', icon: 'fa-solid fa-quote-right' },
 ]
 
 </script>

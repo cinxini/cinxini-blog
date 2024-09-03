@@ -1,16 +1,10 @@
 <template>
   <v-container id="main-content" :width="containerWidth">
     <SectionTitle title="Recent Blog Posts" icon="fa-solid fa-quote-right" />
-    <ContentQuery path="/blog" v-slot="{ data }" :where="{ draft: false }" :sort="{ 'dates.published': -1 }" :limit="2"
-      :skip="skip">
-      <!-- <pre>{{ data }}</pre> -->
-      <!-- <ContentRenderer :value="data" /> -->
-      <ContentList :articles="data" class="mt-10" />
-    </ContentQuery>
-    <!-- <ContentList :articles="posts" class="mt-10" /> -->
-    <v-pagination :length="numPages" v-model="currPage" next-icon="fa-solid fa-caret-right"
-      prev-icon="fa-solid fa-caret-left" rounded="lg" color="base" active-color="primary"
-      @input="gotoPage(currPage)"></v-pagination>
+    <ContentList :articles="posts" class="mt-10" />
+    <v-pagination nuxt :length="numPages" v-model="currPage" next-icon="fa-solid fa-caret-right"
+      prev-icon="fa-solid fa-caret-left" rounded="lg" color="base" active-color="primary" :previous="refresh()"
+      :next="refresh()"></v-pagination>
   </v-container>
 </template>
 
@@ -31,7 +25,7 @@ const fetchPosts = async (pageNo) => {
   return queryContent('/blog')
     .where({ draft: false })
     .sort({ 'dates.published': -1 })
-    .skip((pageNo - 1) * appConfig.maxPostPerPage)
+    .skip(skip.value)
     .limit(appConfig.maxPostPerPage)
     .find()
 }
@@ -39,9 +33,13 @@ const fetchPosts = async (pageNo) => {
 const skip = computed(() => {
   return (currPage.value - 1) * appConfig.maxPostPerPage
 })
-const { data: posts } = await useAsyncData('blogPostList', async () => {
-  console.log('call')
-  return fetchPosts(currPage.value);
+const { data: posts, refresh } = await useAsyncData('blogPostList', async () => {
+  return queryContent('/blog')
+    .where({ draft: false })
+    .sort({ 'dates.published': -1 })
+    .skip(skip.value)
+    .limit(appConfig.maxPostPerPage)
+    .find()
 })
 
 const { data: numPosts } = await useAsyncData('blogPostCount', () => {
@@ -55,21 +53,9 @@ const numPages = computed(() => {
   return Math.ceil(numPosts.value / appConfig.maxPostPerPage);
 })
 
-watch(currPage, async (newPage) => {
-  console.log(newPage)
-  await navigateTo('/posts?page=' + newPage)
-})
 
-const gotoPage = async (pageNo) => {
-  // let link = document.createElement('a');
 
-  // link.href = `${route.path}?page=${pageNo}`;
-  // link.click()
-  console.log(pageNo)
-  const data = await fetchPosts(pageNo);
-  posts.value = data;
 
-}
 </script>
 
 <style></style>
