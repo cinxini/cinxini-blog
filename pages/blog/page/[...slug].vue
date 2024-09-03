@@ -1,13 +1,18 @@
 <template>
-  <v-container class="w-60">
-    <!-- <pre>{{ route.path }}</pre> -->
+  <v-container id="main-content" :width="containerWidth" class="w-60">
+    <SectionTitle title="Recent Blog Posts" icon="fa-solid fa-quote-right" />
     <ContentSection></ContentSection>
   </v-container>
 </template>
 
 <script setup>
 import ContentSection from '@/components/containers/ContentListSection.vue';
-const route = useRoute();
+import SectionTitle from '@/components/display/SectionTitle.vue';
+import { useNuxtDisplay } from '@/composables/nuxtDisplay';
+
+
+const viewport = useViewport()
+const { width: containerWidth } = useNuxtDisplay(viewport.breakpoint);
 
 </script>
 
