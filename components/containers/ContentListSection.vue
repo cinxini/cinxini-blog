@@ -19,10 +19,10 @@ import ContentList from '@/components/containers/ContentList.vue';
 import { computed, ref } from 'vue';
 const route = useRoute()
 const appConfig = useAppConfig()
-console.log(route.params.slug[0])
-const page = ref(Number(route.params.slug[0]))
+// console.log(route.params.slug[0])
+const page = ref(route.params.slug ? Number(route.params.slug[0]) : 1)
 
-const { data: posts } = await useAsyncData(`post-list-page-${route.params.slug[0]}`, async () => {
+const { data: posts } = await useAsyncData(`post-list-page-${page.value}`, async () => {
   const pageNo = route.params.slug ? Number(route.params.slug[0]) : 1;
   const dat = await queryContent('/blog')
     .where({ draft: false })
