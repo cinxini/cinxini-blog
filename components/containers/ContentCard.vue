@@ -2,16 +2,16 @@
   <v-card :key="content._path">
     <div class="d-flex flex-row flex-nowrap">
       <div :style="{ 'max-width': coverImgWidth + 'px', 'min-width': coverImgWidth + 'px' }" class="position-static">
-        <v-img class="position-absolute top-0" :src="coverImg" cover :max-width="coverImgWidth"
-          :min-width="coverImgWidth">
-          <template v-slot:error>
-            <v-img class="mx-auto" :max-width="coverImgWidth" :min-width="coverImgWidth"
-              :src="`/images/blog/default-cover.png`"></v-img>
-          </template>
-        </v-img>
+        <NuxtLink :to="content._path"><v-img class="position-absolute top-0" :src="coverImg" cover
+            :max-width="coverImgWidth" :min-width="coverImgWidth">
+            <template v-slot:error>
+              <v-img class="mx-auto" :max-width="coverImgWidth" :min-width="coverImgWidth"
+                :src="`/images/blog/default-cover.png`"></v-img>
+            </template>
+          </v-img></NuxtLink>
       </div>
       <!-- Content Meta -->
-      <div class="d-flex flex-column pa-3">
+      <div class="d-flex flex-column pa-2 flex-fill">
         <!-- Meta Top -->
         <MetaTop :category="content.category" :date="content.dates.published" />
 
@@ -24,22 +24,34 @@
         </p>
 
         <!-- Meta Tags -->
-        <MetaTags :tags="content.tags" />
+        <div class="d-flex flex-row justify-space-between">
+          <MetaTags :tags="content.tags" />
+          <HoverButton v-if="smAndUp" title="Read More" :to="content._path" />
+          <!-- <v-hover>
+            <template v-slot:default="{ isHovering, props }">
+              <v-btn nuxt v-bind="props" variant="tonal" :color="isHovering ? 'primary' : 'base'" class="mybutton"
+                density="comfortable" width="150" :to="content._path">
+                Read More
+              </v-btn>
+            </template>
+          </v-hover> -->
+        </div>
+
       </div>
     </div>
   </v-card>
 </template>
 
 <script setup>
+import HoverButton from '@/components/containers/HoverButton.vue';
 import { useResponsiveContainer } from '@/composables/display';
 import { computed } from 'vue';
 import { useDisplay } from 'vuetify';
 
-
 import MetaTags from '@/components/containers/MetaTags.vue';
 import MetaTop from '@/components/containers/MetaTop.vue';
 
-const { name } = useDisplay()
+const { name, smAndUp } = useDisplay()
 const { coverImgWidth, descriptionCharMax } = useResponsiveContainer(name);
 
 const props = defineProps({
