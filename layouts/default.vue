@@ -58,6 +58,21 @@ const navItems = [
 <style>
 :root {
   --heading-border-opacity: 0.3;
+  --meta-description-firstletter-color: var(--v-theme-baseVariant);
+  --md-heading-underline-opacity: 0.18;
+  --md-heading-underline-color: var(--v-theme-base);
+  --md-heading-section-color: var(--v-theme-primary);
+  --md-heading-hover-opacity: 0.7;
+  --md-heading-color: var(--v-theme-baseVariant);
+  --md-pre-background-color: var(--v-theme-primary);
+  --md-pre-background-opacity: 0.03;
+  --md-bold-color: var(--v-theme-baseVariant);
+  --md-text-color: 0 0 0;
+  --md-text-size: 16px;
+  --md-quote-background-color: var(--v-theme-primary);
+  --md-quote-background-opaacity: 0.1;
+  --md-quote-text-color: var(--v-theme-baseVariant);
+  --md-link-color: var(--v-theme-primary);
 }
 
 /* font */
