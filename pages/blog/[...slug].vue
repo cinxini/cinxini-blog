@@ -1,31 +1,17 @@
 <template>
   <MainContainer>
-    <MetaTop :category="meta.category" :date="meta.date" />
-    <v-img class="" :src="meta.cover" cover max-width="140" min-width="140">
-      <template v-slot:error>
-        <v-img class="mx-auto" max-width="140" min-width="140" :src="`/images/blog/default-cover.png`"></v-img>
-      </template>
-    </v-img>
-    <!-- Meta Body -->
-    <p>
-      <NuxtLink class="meta-title" :to="path">{{ meta.title }}</NuxtLink>
-    </p>
-
-    <MetaTags :tags="meta.tags"></MetaTags>
-    <p class="meta-description my-5">
-      {{ meta.description.slice(0, 1) }}{{ meta.description.slice(1) }}
-    </p>
-    <div class="mt-6">
+    <ArticleHeader :meta="meta" />
+    <ArticleBody class="mt-6">
       <ContentDoc />
-    </div>
+    </ArticleBody>
   </MainContainer>
 </template>
 
 <script setup>
+import ArticleBody from '@/components/containers/ArticleBody.vue';
+import ArticleHeader from '@/components/containers/ArticleHeader.vue';
 import MainContainer from '@/components/containers/MainContaienr.vue';
-import MetaTags from '@/components/containers/MetaTags.vue';
-import MetaTop from '@/components/containers/MetaTop.vue';
-import { useDate } from 'vuetify'
+import { useDate } from 'vuetify';
 
 const date = useDate()
 const { path } = useRoute();
@@ -54,30 +40,4 @@ const meta = computed(() => {
 console.log(meta.value)
 </script>
 
-<style scoped>
-.meta-description {
-  font-family: "Poppins", sans-serif;
-  font-size: 0.875rem !important;
-  /* font-weight: 400; */
-  /* line-height: 1.5;
-  letter-spacing: 0.0178571429em !important; */
-}
-
-.meta-description::first-letter {
-  text-transform: uppercase;
-  initial-letter: 2;
-  color: rgb(var(--v-theme-tertiary));
-  font-weight: bold;
-  margin-right: .75em;
-}
-
-/* .meta-description .first-letter {
-  text-transform: uppercase;
-  font-size: 1.8em;
-  font-weight: 500;
-  color: rgb(var(--v-theme-primary));
-  padding-left: 20px;
-  line-height: 70px;
-  font-size: 35px;
-} */
-</style>
+<style scoped></style>

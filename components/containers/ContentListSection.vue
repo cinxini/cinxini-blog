@@ -59,8 +59,4 @@ const nextPage = computed(() => {
 })
 </script>
 
-<style scoped>
-.pagination:hover {
-  color: red;
-}
-</style>
+<style scoped></style>
