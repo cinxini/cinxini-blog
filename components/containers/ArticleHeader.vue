@@ -10,8 +10,8 @@
     </p>
 
     <MetaTags :tags="meta.tags" class="my-1"></MetaTags>
-    <p class="meta-description my-5" style="max-width: 80%;">
-      {{ meta.description.slice(0, 1) }}{{ meta.description.slice(1) }}
+    <p class="meta-description my-5" :style="{ 'max-width': metaDescriptionWidth }">
+      {{ meta.description }}
     </p>
   </div>
 </template>
@@ -19,6 +19,10 @@
 <script setup>
 import MetaTags from '@/components/containers/MetaTags.vue';
 import MetaTop from '@/components/containers/MetaTop.vue';
+import { useNuxtDisplay } from '@/composables/nuxtDisplay';
+
+const viewport = useViewport()
+const { metaDescriptionWidth } = useNuxtDisplay(viewport.breakpoint);
 const props = defineProps({
   meta: Object
 })
@@ -42,12 +46,13 @@ const props = defineProps({
 .meta-description {
   font-family: "Poppins", sans-serif;
   font-size: 0.875rem !important;
+  font-weight: 400;
 }
 
 .meta-description::first-letter {
   text-transform: uppercase;
   initial-letter: 2;
-  color: rgb(var(--v-theme-tertiary));
+  color: rgb(var(--meta-description-firstletter-color));
   font-weight: bold;
   margin-right: .75em;
 }

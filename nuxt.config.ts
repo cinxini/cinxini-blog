@@ -29,7 +29,14 @@ export default defineNuxtConfig({
     })
   
   },'@nuxt/image', 'nuxt-viewport','@nuxt/content'],
-
+  content: {
+    highlight: {
+      theme: 'github-light'
+    },
+    markdown: {
+      toc: { depth: 3, searchDepth: 3 }
+    }
+  },
   routeRules: {
     '/': { prerender: true },
   },
