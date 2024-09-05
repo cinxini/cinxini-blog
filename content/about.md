@@ -1,9 +1,9 @@
 ---
 title: "About Me"
 author: "@cinxini"
-name: Cinxini Cinxinixini
-shortBio: Developer
-updated: "2024-08-31"
+name: Nutnaree Kleawsirikul
+shortBio: Data Scientist & Web Application Developer
+updated: "2024-09-05"
 featured: false
 social:
     kaggle: https://www.kaggle.com/cinxini

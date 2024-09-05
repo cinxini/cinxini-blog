@@ -51,6 +51,14 @@ const navItems = [
       <slot />
     </v-main>
 
+    <v-footer class="position-absolute bottom-0 w-100" style="padding-top: 30px; padding-bottom: 20px;">
+      <div class="d-flex flex-column justify-center" style="width:100%;">
+        <p class="footer-credit text-center">Powered by <span class="emphasis-text">Nuxt</span> & <span
+            class="emphasis-text">Nuxt-Content</span>. Created with <span class="emphasis-text">Vuetify</span> & <span
+            class="emphasis-text">Fontawesome</span>.</p>
+      </div>
+
+    </v-footer>
   </v-app>
 </template>
 
@@ -110,5 +118,14 @@ body {
 
 #main-content.w-95 {
   width: 95%;
+}
+
+.footer-credit {
+  font-size: 0.75em;
+}
+
+.emphasis-text {
+  font-weight: bold;
+  color: rgb(var(--v-theme-primary));
 }
 </style>

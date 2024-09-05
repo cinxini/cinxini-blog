@@ -71,8 +71,9 @@
         <ArticleBody class="mt-6">
           <ContentDoc />
         </ArticleBody>
+        <v-divider class="border-opacity-25" color="base"></v-divider>
         <a id="comment-section"></a>
-        <GiscusComment class="my-5" />
+        <GiscusComment class="" style="margin-top: 50px; margin-bottom: 90px;" />
       </div>
     </MainContainer>
   </v-layout>
