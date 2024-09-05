@@ -75,6 +75,10 @@ const navItems = [
   --md-link-color: var(--v-theme-primary);
 }
 
+.v-navigation-drawer {
+  z-index: 999999 !important;
+}
+
 /* font */
 .poppins {
   font-family: "Poppins", sans-serif;
