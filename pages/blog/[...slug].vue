@@ -52,7 +52,7 @@
                 <template v-slot:default="{ isHovering, props }">
                   <v-btn v-bind="props" icon="fa-brands fa-x-twitter" variant="plain"
                     :color="isHovering ? 'primary' : 'base'" style=""
-                    :href="`https://x.com/intent/post?url=https//google.com`" target="_blank">
+                    :href="`https://x.com/intent/post?url=${currentHref}`" target="_blank">
                   </v-btn>
                 </template>
               </v-hover>
@@ -60,7 +60,7 @@
                 <template v-slot:default="{ isHovering, props }">
                   <v-btn v-bind="props" icon="fa-brands fa-linkedin-in" variant="plain"
                     :color="isHovering ? 'primary' : 'base'" style=""
-                    :href="`https://www.linkedin.com/feed/?linkOrigin=LI_BADGE&shareActive=true&shareUrl=www.google.com`"
+                    :href="`https://www.linkedin.com/feed/?linkOrigin=LI_BADGE&shareActive=true&shareUrl=${currentHref}`"
                     target="_blank">
                   </v-btn>
                 </template>
@@ -93,7 +93,10 @@ const { path } = useRoute();
 const viewport = useViewport()
 const appConfig = useAppConfig()
 const { currentRoute } = useRouter();
-const routeName = currentRoute.value.name;
+
+const currentHref = computed(() => {
+  return `${appConfig.baseUrl}${currentRoute.value.fullPath}`
+})
 
 console.log('current route::', currentRoute.value)
 const { data: blogPost } = await useAsyncData(`content-${path}`, () => {
