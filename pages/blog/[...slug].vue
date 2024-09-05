@@ -1,10 +1,10 @@
 <template>
 
   <v-layout>
-    <v-navigation-drawer location="end" app floating width="250" :temporary="temporary"
+    <v-navigation-drawer location="end" app floating width="250"
       style="padding-top: 50px; position:fixed; top:0; right:0; overflow-y: auto;  z-index: 1005;" variant="plain">
       <div style="width:250px; padding-top: 30px;">
-        <Toc :tocs="tocs" :currentId="tocs[0].id" />
+        <Toc :tocs="tocs" :currentId="intersectedTocId" />
       </div>
     </v-navigation-drawer>
     <MainContainer class="position-relative">
@@ -25,7 +25,7 @@
               </v-hover>
             </template>
 
-            <Toc :tocs="tocs" :currentId="tocs[0].id" />
+            <Toc :tocs="tocs" :currentId="intersectedTocId" />
           </v-menu>
 
           <v-hover>
@@ -65,7 +65,6 @@
             </v-card>
           </v-menu>
         </v-card>
-
         <ArticleBody class="mt-6">
           <ContentDoc />
         </ArticleBody>
@@ -79,11 +78,13 @@ import ArticleBody from '@/components/containers/ArticleBody.vue';
 import ArticleHeader from '@/components/containers/ArticleHeader.vue';
 import MainContainer from '@/components/containers/MainContaienr.vue';
 import Toc from '@/components/containers/Toc.vue';
-import { computed } from 'vue';
+import { computed, watch } from 'vue';
 import { useDate } from 'vuetify';
+
 const date = useDate()
 const { path } = useRoute();
 const viewport = useViewport()
+const appConfig = useAppConfig()
 
 const { data: blogPost } = await useAsyncData(`content-${path}`, () => {
   return queryContent().where({ _path: path }).findOne();
@@ -133,6 +134,36 @@ console.log(tocs.value)
 
 const bottomNavActive = computed(() => {
   return viewport.isLessThan('desktopMedium') ? true : false;
+})
+
+const intersectedTocId = ref(null);
+const observer = ref(null)
+
+// hooks
+onMounted(() => {
+  observer.value = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      const id = entry.target.getAttribute('id')
+      if (entry.isIntersecting) {
+        intersectedTocId.value = id
+      }
+
+    })
+  }, {
+    threshold: appConfig.intersectObsThreshold
+  })
+
+  document.querySelectorAll(appConfig.intersectObsIds).forEach((section) => {
+    observer.value?.observe(section)
+  })
+})
+
+onUnmounted(() => {
+  observer.value?.disconnect()
+})
+
+watch(intersectedTocId, (newId) => {
+  console.log("intersect id::", newId)
 })
 
 </script>
