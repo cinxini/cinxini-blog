@@ -31,7 +31,7 @@
           <v-hover>
             <template v-slot:default="{ isHovering, props }">
               <v-btn nuxt v-bind="props" icon="fa-solid fa-comment" variant="plain" density="comfortable"
-                :color="isHovering ? 'primary' : 'base'">
+                :color="isHovering ? 'primary' : 'base'" :to="`#comment-section`">
               </v-btn>
             </template>
           </v-hover>
@@ -50,15 +50,18 @@
             <v-card class="d-flex flex-column" variant="flat" elevation="0">
               <v-hover>
                 <template v-slot:default="{ isHovering, props }">
-                  <v-btn nuxt v-bind="props" icon="fa-brands fa-x-twitter" variant="plain"
-                    :color="isHovering ? 'primary' : 'base'" style="">
+                  <v-btn v-bind="props" icon="fa-brands fa-x-twitter" variant="plain"
+                    :color="isHovering ? 'primary' : 'base'" style=""
+                    :href="`https://x.com/intent/post?url=https//google.com`" target="_blank">
                   </v-btn>
                 </template>
               </v-hover>
               <v-hover>
                 <template v-slot:default="{ isHovering, props }">
-                  <v-btn nuxt v-bind="props" icon="fa-brands fa-linkedin-in" variant="plain"
-                    :color="isHovering ? 'primary' : 'base'" style="">
+                  <v-btn v-bind="props" icon="fa-brands fa-linkedin-in" variant="plain"
+                    :color="isHovering ? 'primary' : 'base'" style=""
+                    :href="`https://www.linkedin.com/feed/?linkOrigin=LI_BADGE&shareActive=true&shareUrl=www.google.com`"
+                    target="_blank">
                   </v-btn>
                 </template>
               </v-hover>
@@ -68,6 +71,8 @@
         <ArticleBody class="mt-6">
           <ContentDoc />
         </ArticleBody>
+        <a id="comment-section"></a>
+        <GiscusComment class="my-5" />
       </div>
     </MainContainer>
   </v-layout>
@@ -76,7 +81,9 @@
 <script setup>
 import ArticleBody from '@/components/containers/ArticleBody.vue';
 import ArticleHeader from '@/components/containers/ArticleHeader.vue';
+import GiscusComment from '@/components/containers/GiscusComment.vue';
 import MainContainer from '@/components/containers/MainContaienr.vue';
+
 import Toc from '@/components/containers/Toc.vue';
 import { computed, watch } from 'vue';
 import { useDate } from 'vuetify';
@@ -85,7 +92,10 @@ const date = useDate()
 const { path } = useRoute();
 const viewport = useViewport()
 const appConfig = useAppConfig()
+const { currentRoute } = useRouter();
+const routeName = currentRoute.value.name;
 
+console.log('current route::', currentRoute.value)
 const { data: blogPost } = await useAsyncData(`content-${path}`, () => {
   return queryContent().where({ _path: path }).findOne();
 })
