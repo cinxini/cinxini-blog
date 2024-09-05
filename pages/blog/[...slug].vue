@@ -7,7 +7,6 @@
         <Toc :tocs="tocs" :currentId="tocs[0].id" />
       </div>
     </v-navigation-drawer>
-    <!-- <ArticleSidebar :isOpened="toggleToc" :tocs="tocs" :temporary="bottomNavActive ? true : false" /> -->
     <MainContainer class="position-relative">
       <div class="position-relative">
         <ArticleHeader :meta="meta" />
@@ -72,12 +71,7 @@
         </ArticleBody>
       </div>
     </MainContainer>
-
-
-
   </v-layout>
-
-
 </template>
 
 <script setup>
@@ -91,7 +85,6 @@ const date = useDate()
 const { path } = useRoute();
 const viewport = useViewport()
 
-const toggleToc = ref(false)
 const { data: blogPost } = await useAsyncData(`content-${path}`, () => {
   return queryContent().where({ _path: path }).findOne();
 })
@@ -142,19 +135,4 @@ const bottomNavActive = computed(() => {
   return viewport.isLessThan('desktopMedium') ? true : false;
 })
 
-const SideNavActive = computed(() => {
-  return viewport.isLessThan('desktopMedium') ? false : true;
-})
 </script>
-
-<style scoped>
-div.sticky-tools {
-  position: sticky;
-  left: 0;
-  bottom: 20px;
-  width: 100%;
-  background-color: red;
-  color: white;
-  text-align: center;
-}
-</style>
