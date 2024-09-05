@@ -15,7 +15,7 @@
               <template v-slot:activator="{ props: menuProps }">
                 <v-hover>
                   <template v-slot:default="{ isHovering, props }">
-                    <v-btn nuxt v-bind="props, menuProps" icon="fa-solid fa-list" variant="plain" :density="comfortable"
+                    <v-btn nuxt v-bind="props, menuProps" icon="fa-solid fa-list" variant="plain" density="comfortable"
                       :color="isHovering ? 'primary' : 'base'" style="">
                     </v-btn>
                   </template>
@@ -27,7 +27,7 @@
 
             <v-hover>
               <template v-slot:default="{ isHovering, props }">
-                <v-btn nuxt v-bind="props" icon="fa-solid fa-comment" variant="plain" :density="comfortable"
+                <v-btn nuxt v-bind="props" icon="fa-solid fa-comment" variant="plain" density="comfortable"
                   :color="isHovering ? 'primary' : 'base'">
                 </v-btn>
               </template>
@@ -38,7 +38,7 @@
                 <v-hover>
                   <template v-slot:default="{ isHovering, props }">
                     <v-btn nuxt v-bind="props, menuProps" icon="fa-solid fa-share-nodes" variant="plain"
-                      :density="comfortable" :color="isHovering ? 'primary' : 'base'" style="">
+                      density="comfortable" :color="isHovering ? 'primary' : 'base'" style="">
                     </v-btn>
                   </template>
                 </v-hover>
