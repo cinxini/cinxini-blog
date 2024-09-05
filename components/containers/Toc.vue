@@ -31,7 +31,6 @@ const props = defineProps({
 
 .toc-item.current {
   background-color: rgba(var(--v-theme-secondaryContainer-lighten-1), 0.4);
-  /* border-inline-start: 8px solid rgba(var(--v-theme-primary), 0.3); */
   border-inline-start-color: rgba(var(--v-theme-primary), 0.3);
 }
 
