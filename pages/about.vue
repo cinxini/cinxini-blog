@@ -28,27 +28,36 @@
         <v-btn v-if="aboutMe.social.kaggle" class="social__bttn" icon="fa-brands fa-kaggle" size="small"
           :href="aboutMe.social.kaggle" target="_blank" />
       </p>
-      <!-- <div style="height: 30px;">
+      <div style="height: 30px;">
         <v-hover>
           <template v-slot:default="{ isHovering, props }">
-            <v-btn v-bind="props" :variant="isHovering ? 'tonal' : 'flat'" :color="isHovering ? 'primary' : 'baseColor'"
-              class="mybutton" density="comfortable" @click="isOpenned = !isOpenned" width="150">
-              <span>{{ isOpenned ? 'Hide' : 'More About Me' }}</span>
+            <v-btn nuxt v-bind="props" variant="tonal" :color="isHovering ? 'primary' : 'base'" class="mybutton"
+              density="comfortable" :width="width" @click="isOpenned = !isOpenned">
+              {{ isOpenned ? "Hide" : "More About Me" }}
             </v-btn>
           </template>
-</v-hover>
-</div> -->
+        </v-hover>
+      </div>
+    </div>
+
+    <div v-if="isOpenned">
+      <ArticleBody class="poppins my-4 main-background">
+        <ContentDoc path="/about" />
+      </ArticleBody>
     </div>
   </v-container>
 </template>
 
 <script setup>
+import ArticleBody from '@/components/containers/ArticleBody.vue';
 import SectionTitle from '@/components/display/SectionTitle.vue';
 
 const { path } = useRoute()
 const { data: aboutMe } = await useAsyncData(`aboutme`, () => {
   return queryContent().where({ _path: path }).findOne();
 })
+
+const isOpenned = ref(false);
 console.log(aboutMe.value)
 </script>
 
