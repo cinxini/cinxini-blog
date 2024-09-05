@@ -31,7 +31,7 @@
           <v-hover>
             <template v-slot:default="{ isHovering, props }">
               <v-btn nuxt v-bind="props" icon="fa-solid fa-comment" variant="plain" density="comfortable"
-                :color="isHovering ? 'primary' : 'base'">
+                :color="isHovering ? 'primary' : 'base'" :to="`#comment-section`">
               </v-btn>
             </template>
           </v-hover>
@@ -68,6 +68,8 @@
         <ArticleBody class="mt-6">
           <ContentDoc />
         </ArticleBody>
+        <a id="comment-section"></a>
+        <GiscusComment class="my-5" />
       </div>
     </MainContainer>
   </v-layout>
@@ -76,7 +78,9 @@
 <script setup>
 import ArticleBody from '@/components/containers/ArticleBody.vue';
 import ArticleHeader from '@/components/containers/ArticleHeader.vue';
+import GiscusComment from '@/components/containers/GiscusComment.vue';
 import MainContainer from '@/components/containers/MainContaienr.vue';
+
 import Toc from '@/components/containers/Toc.vue';
 import { computed, watch } from 'vue';
 import { useDate } from 'vuetify';
