@@ -12,8 +12,8 @@ export function useNuxtDisplay(breakpoint) {
             case "mobileWide":
                 return "98%";
             case "tablet":
-                return "80%";
             case "desktop":
+                return "80%";
             case "desktopMedium":
             case "desktopWide":
                 return "60%";

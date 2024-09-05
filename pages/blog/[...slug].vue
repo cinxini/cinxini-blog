@@ -1,51 +1,75 @@
 <template>
+
   <div>
     <v-layout>
-      <MainContainer>
-        <ArticleHeader :meta="meta" />
-        <ArticleBody class="mt-6">
-          <ContentDoc />
-        </ArticleBody>
-      </MainContainer>
-      <v-bottom-navigation style="position:fixed; bottom:0;" :active="bottomNavActive" color="indigo">
-        <v-btn>
-          <v-icon>mdi-history</v-icon>
 
-          Recents
-        </v-btn>
+      <ArticleSidebar :isOpened="toggleToc" :tocs="tocs" :temporary="bottomNavActive ? true : false" />
+      <MainContainer class="position-relative">
+        <div class="position-relative">
+          <ArticleHeader :meta="meta" />
+          <v-card :class="{ 'flex-column': !bottomNavActive }" variant="flat"
+            class="d-flex  ga-2 justify-center position-fixed pa-1"
+            :style="{ left: bottomNavActive ? 0 : '15%', top: bottomNavActive ? undefined : '80px', bottom: bottomNavActive ? '0px' : undefined, width: bottomNavActive ? '100%' : undefined }">
 
-        <v-btn>
-          <v-icon>mdi-heart</v-icon>
+            <v-menu v-if="bottomNavActive" location="top center">
+              <template v-slot:activator="{ props: menuProps }">
+                <v-hover>
+                  <template v-slot:default="{ isHovering, props }">
+                    <v-btn nuxt v-bind="props, menuProps" icon="fa-solid fa-list" variant="plain" :density="comfortable"
+                      :color="isHovering ? 'primary' : 'base'" style="">
+                    </v-btn>
+                  </template>
+                </v-hover>
+              </template>
 
-          Favorites
-        </v-btn>
+              <Toc :tocs="tocs" :currentId="tocs[0].id" />
+            </v-menu>
 
-        <v-btn>
-          <v-icon>mdi-map-marker</v-icon>
+            <v-hover>
+              <template v-slot:default="{ isHovering, props }">
+                <v-btn nuxt v-bind="props" icon="fa-solid fa-comment" variant="plain" :density="comfortable"
+                  :color="isHovering ? 'primary' : 'base'">
+                </v-btn>
+              </template>
+            </v-hover>
 
-          Nearby
-        </v-btn>
-      </v-bottom-navigation>
-      <v-navigation-drawer location="right" :max-width="250" :width="250" permanent app
-        style="position:fixed; top:0; right:0; overflow-y: auto; ">
-        <div style="padding-top: 50px; width:250px;">
+            <v-menu :location="bottomNavActive ? 'top' : 'start'">
+              <template v-slot:activator="{ props: menuProps }">
+                <v-hover>
+                  <template v-slot:default="{ isHovering, props }">
+                    <v-btn nuxt v-bind="props, menuProps" icon="fa-solid fa-share-nodes" variant="plain"
+                      :density="comfortable" :color="isHovering ? 'primary' : 'base'" style="">
+                    </v-btn>
+                  </template>
+                </v-hover>
+              </template>
 
-          <v-card variant="flat">
-            <v-card-title> Table of Contents
-            </v-card-title>
-            <v-list class="overflow-hidden mx-4 " variant="plain">
-              <v-list-item class="toc-item py-1" :class="{ 'current': toc.id === 'h2-title' }" v-for="toc in tocs"
-                width="250" density="compact" min-height="20">
-                <v-list-item-title>
-                  <a class="toc-link" :href="`#${toc.id}`">
-                    {{ toc.label }}
-                  </a>
-                </v-list-item-title>
-              </v-list-item>
-            </v-list>
+              <v-card class="d-flex flex-column" variant="flat" elevation="0">
+                <v-hover>
+                  <template v-slot:default="{ isHovering, props }">
+                    <v-btn nuxt v-bind="props" icon="fa-brands fa-x-twitter" variant="plain"
+                      :color="isHovering ? 'primary' : 'base'" style="">
+                    </v-btn>
+                  </template>
+                </v-hover>
+                <v-hover>
+                  <template v-slot:default="{ isHovering, props }">
+                    <v-btn nuxt v-bind="props" icon="fa-brands fa-linkedin-in" variant="plain"
+                      :color="isHovering ? 'primary' : 'base'" style="">
+                    </v-btn>
+                  </template>
+                </v-hover>
+              </v-card>
+            </v-menu>
           </v-card>
+
+          <ArticleBody class="mt-6">
+            <ContentDoc />
+          </ArticleBody>
         </div>
-      </v-navigation-drawer>
+      </MainContainer>
+
+
 
     </v-layout>
 
@@ -55,12 +79,16 @@
 <script setup>
 import ArticleBody from '@/components/containers/ArticleBody.vue';
 import ArticleHeader from '@/components/containers/ArticleHeader.vue';
+import ArticleSidebar from '@/components/containers/ArticleSidebar.vue';
 import MainContainer from '@/components/containers/MainContaienr.vue';
-import { ref } from 'vue';
+import Toc from '@/components/containers/Toc.vue';
+import { computed } from 'vue';
 import { useDate } from 'vuetify';
 const date = useDate()
 const { path } = useRoute();
+const viewport = useViewport()
 
+const toggleToc = ref(false)
 const { data: blogPost } = await useAsyncData(`content-${path}`, () => {
   return queryContent().where({ _path: path }).findOne();
 })
@@ -82,7 +110,6 @@ const meta = computed(() => {
     return null;
   }
 })
-console.log(blogPost.value.body)
 
 const linkDepthToHeadingLevel = (depth) => {
   return `h${depth}`
@@ -103,44 +130,28 @@ const tocs = computed(() => {
     const newLink = createLinkItem(link);
     console.log(newLink)
     links.push(newLink);
-
-    // // h3 children
-    // if (link.children) {
-    //   console.log('children', link.children)
-    //   link.children.forEach(childLink => {
-    //     const newChildLink = createLinkItem(childLink);
-    //     links.push(newChildLink)
-    //   })
-    // }
   })
   return links;
 })
 console.log(tocs.value)
 
-const bottomNavActive = ref(true)
+const bottomNavActive = computed(() => {
+  return viewport.isLessThan('desktopMedium') ? true : false;
+})
+
+const SideNavActive = computed(() => {
+  return viewport.isLessThan('desktopMedium') ? false : true;
+})
 </script>
 
 <style scoped>
-.toc-item {
-  background-color: rgba(var(--v-theme-secondaryContainer-lighten-1), 0.4);
-  border-inline-start: 8px solid rgba(var(--v-theme-base), 0.1);
-  padding: 1.25em 1.5em;
-}
-
-.toc-item.current {
-  background-color: rgba(var(--v-theme-secondaryContainer-lighten-1), 0.4);
-  /* border-inline-start: 8px solid rgba(var(--v-theme-primary), 0.3); */
-  border-inline-start-color: rgba(var(--v-theme-primary), 0.3);
-}
-
-.toc-item a.toc-link {
-  color: rgb(var(--v-theme-baseVaraint));
-  font-weight: 400;
-  font-size: 0.8em;
-}
-
-.toc-item.current a.toc-link {
-  color: rgb(var(--v-theme-primary));
-  font-weight: 450;
+div.sticky-tools {
+  position: sticky;
+  left: 0;
+  bottom: 20px;
+  width: 100%;
+  background-color: red;
+  color: white;
+  text-align: center;
 }
 </style>
