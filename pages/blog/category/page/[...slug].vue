@@ -3,7 +3,10 @@
     <div class="category-page-title d-flex flex-row ga-2 align-center">
       <v-icon icon="fa-solid fa-circle-question" color="baseVariant" size="small"></v-icon>
       <div>Posts
-        with <span class="category-emphasis">{{ category }}</span> category</div>
+        {{ category ? 'with' : 'in' }} <span
+          :class="{ 'category-emphasis': category }">{{ category ? category : 'all' }}</span>
+        category
+      </div>
     </div>
     <!-- <DotLoader /> -->
     <!-- <ContentList :articles="posts" class="mt-10" /> -->
