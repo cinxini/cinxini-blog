@@ -53,7 +53,7 @@ const { data: posts } = await useAsyncData(`post-list-page-${props.fromPage}-${c
   return dat
 })
 
-const { data: numPosts } = await useAsyncData('blogPostCount', () => {
+const { data: numPosts } = await useAsyncData(`blogPostCount-${props.fromPage}-${currPage.value}`, () => {
   return queryContent('/blog')
     .where(props.query)
     .count()
