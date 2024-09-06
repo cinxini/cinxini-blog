@@ -7,7 +7,7 @@
     </div>
     <!-- <DotLoader /> -->
     <!-- <ContentList :articles="posts" class="mt-10" /> -->
-    <QueryContentList :query="query" :fromPage="`/category/${category}`" :page="page" />
+    <QueryContentList :query="query" :fromPage="`/blog/category${category ? '/' + category : ''}`" :page="page" />
 
   </MainContainer>
 </template>
@@ -18,13 +18,26 @@ import QueryContentList from '@/components/containers/QeuryContetListSection.vue
 // import DotLoader from '@/components/display/DotLoader.vue';
 
 const route = useRoute()
-const category = ref(route.params ? route.params.slug[0] : null);
-console.log('category slug page::', route)
+function isNumber(value) {
+  return typeof value === 'number';
+}
+const category = computed(() => {
+  return null;
+  // if (route.params.slug) {
+  //   if (route.params.slug[0] === 'page') {
+  //     return null;
+  //   } else {
+  //     return route.params.slug[0];
+  //   }
+  // } else {
+  //   return null;
+  // }
+})
+console.log('/blog/category/page/[...slug].vue::', route, route.params.slug)
 
 const page = computed(() => {
-  if (route.params.slug && route.params.slug.length > 1) {
-    console.log('slug > 1:::', route.params.slug)
-    return Number(route.params.slug[1]);
+  if (route.params.slug) {
+    return Number(route.params.slug[0]);
   } else {
     return 1;
   }
@@ -39,8 +52,6 @@ const query = computed(() => {
   console.log(newQuery)
   return newQuery;
 })
-
-
 </script>
 
 <style scoped>

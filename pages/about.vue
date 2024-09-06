@@ -76,7 +76,6 @@ const { data: aboutMe } = await useAsyncData(`aboutme`, () => {
 })
 
 const isOpenned = ref(false);
-console.log(aboutMe.value)
 
 const workItems = [
   {
