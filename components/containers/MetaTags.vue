@@ -5,7 +5,7 @@
       <v-hover>
         <template v-slot:default="{ isHovering, props }">
           <v-chip nuxt v-bind="props" link size="small" density="compact" pill
-            :color="isHovering ? 'secondary' : 'base'" variant="tonal" :to="`/tag/${tag}`">
+            :color="isHovering ? 'secondary' : 'base'" variant="tonal" :to="`/blog/tag/${tag}`">
             {{ tag }}</v-chip>
         </template>
       </v-hover>
