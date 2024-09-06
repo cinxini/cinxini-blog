@@ -42,6 +42,7 @@ function isNumber(value) {
 }
 
 const { data: posts } = await useAsyncData(`post-list-page-${props.fromPage}-${currPage.value}`, async () => {
+  console.log('call query')
   const dat = await queryContent('/blog')
     .where(props.query)
     .sort({ 'dates.published': -1 })
