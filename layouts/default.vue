@@ -47,7 +47,7 @@ const navItems = [
         </div>
       </template>
     </v-app-bar>
-    <v-main style="padding-top: 50px;">
+    <v-main style="padding-top: 50px; padding-bottom: 100px;">
       <slot />
     </v-main>
 

@@ -66,7 +66,7 @@ export function useNuxtDisplay(breakpoint) {
     }
 
     watchEffect(() => {
-        console.log("nuxtDisplay watcheffect", toValue(toValue(breakpoint)));
+        // console.log("nuxtDisplay watcheffect", toValue(toValue(breakpoint)));
         width.value = getContainerWidth(toValue(breakpoint));
         coverImgWidth.value = getConverImgWidth(toValue(breakpoint));
         descriptionCharMax.value = getDescriptionCharMax(toValue(breakpoint));

@@ -7,7 +7,7 @@
     </div>
     <!-- <DotLoader /> -->
     <!-- <ContentList :articles="posts" class="mt-10" /> -->
-    <QueryContentList :query="query" :fromPage="`/category/${category}`" :page="page" />
+    <QueryContentList :query="query" :fromPage="`/blog/category/${category}`" :page="page" />
 
   </MainContainer>
 </template>
@@ -19,12 +19,11 @@ import QueryContentList from '@/components/containers/QeuryContetListSection.vue
 
 const route = useRoute()
 const category = ref(route.params ? route.params.slug[0] : null);
-console.log('category slug page::', route)
+console.log('/blog/category/[...slug].vue ::', route, route.params.slug)
 
 const page = computed(() => {
   if (route.params.slug && route.params.slug.length > 1) {
-    console.log('slug > 1:::', route.params.slug)
-    return Number(route.params.slug[1]);
+    return Number(route.params.slug[2]);
   } else {
     return 1;
   }

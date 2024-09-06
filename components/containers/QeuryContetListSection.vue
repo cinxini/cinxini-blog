@@ -1,15 +1,16 @@
 <template>
   <div>
+    <p>Found {{ numPosts }} posts</p>
     <ContentList :articles="posts" class="mt-10" />
     <div class="d-flex flex-row ga-3 justify-center align-center mt-5">
       <v-btn nuxt variant="plain" icon="fa-solid fa-caret-left" color="base" density="compact"
-        :disabled="currPage === 1 || currPage === null ? true : false" :to="`${fromPage}/${prevPage}`"></v-btn>
+        :disabled="currPage === 1 || currPage === null ? true : false" :to="`${fromPage}/page/${prevPage}`"></v-btn>
 
-      <v-btn nuxt v-for="i in numPages" :to="`${fromPage}/${i}`" min-width="10" variant="text"
+      <v-btn nuxt v-for="i in numPages" :to="`${fromPage}/page/${i}`" min-width="10" variant="text"
         :color="i === currPage ? 'primary' : 'base'" rounded="lg" class="pagination my-0">{{ i }}</v-btn>
 
       <v-btn nuxt variant="plain" icon="fa-solid fa-caret-right" color="base" density="compact"
-        :disabled="currPage === numPages ? true : false" :to="`${fromPage}/${nextPage}`"></v-btn>
+        :disabled="currPage === numPages ? true : false" :to="`${fromPage}/page/${nextPage}`"></v-btn>
     </div>
   </div>
 </template>
@@ -57,13 +58,12 @@ const { data: numPosts } = await useAsyncData('blogPostCount', () => {
     .where(props.query)
     .count()
 })
-console.log('num posts', numPosts.value)
 
 const numPages = computed(() => {
   if (numPosts.value === 0 || numPosts.value < appConfig.maxPostPerPag) return 1;
   return Math.ceil(numPosts.value / appConfig.maxPostPerPage);
 })
-console.log('num pages', numPages.value)
+console.log('num posts', numPosts.value, 'num pages', numPages.value)
 
 const prevPage = computed(() => {
   if (currPage.value - 1 > 0) {

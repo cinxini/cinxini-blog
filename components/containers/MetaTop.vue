@@ -3,7 +3,7 @@
     <v-hover>
       <template v-slot:default="{ isHovering, props }">
         <v-chip nuxt v-bind="props" density="comfortable" rounded="sm" size="small"
-          :variant="isHovering ? 'tonal' : 'text'" color="tertiary" :to="`/category/${category}`">
+          :variant="isHovering ? 'tonal' : 'text'" color="tertiary" :to="`/blog/category/${category}`">
           <v-icon icon="fa-solid fa-folder" start size="x-small"></v-icon>
           {{ category }}</v-chip>
       </template>

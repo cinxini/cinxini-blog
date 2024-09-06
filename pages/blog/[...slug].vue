@@ -99,7 +99,6 @@ const currentHref = computed(() => {
   return `${appConfig.baseUrl}${currentRoute.value.fullPath}`
 })
 
-console.log('current route::', currentRoute.value)
 const { data: blogPost } = await useAsyncData(`content-${path}`, () => {
   return queryContent().where({ _path: path }).findOne();
 })
@@ -139,12 +138,10 @@ const tocs = computed(() => {
   const links = []
   blogPost.value.body.toc.links.forEach(link => {
     const newLink = createLinkItem(link);
-    console.log(newLink)
     links.push(newLink);
   })
   return links;
 })
-console.log(tocs.value)
 
 const bottomNavActive = computed(() => {
   return viewport.isLessThan('desktopMedium') ? true : false;
@@ -176,8 +173,5 @@ onUnmounted(() => {
   observer.value?.disconnect()
 })
 
-watch(intersectedTocId, (newId) => {
-  console.log("intersect id::", newId)
-})
 
 </script>
