@@ -1,27 +1,28 @@
 <template>
     <MainContainer>
-        <div class="tag-page-title d-flex flex-row ga-2 align-center">
+        <div class="category-page-title d-flex flex-row ga-2 align-center">
             <v-icon icon="fa-solid fa-circle-question" color="baseVariant" size="small"></v-icon>
             <div>Posts
-                with <span class="tag-emphasis">{{ tag }}</span> tag</div>
+                with <span class="category-emphasis">{{ tag }}</span> tag</div>
         </div>
-        <QueryContentList :query="query" :fromPage="`/tag/${tag}`" :page="page" />
+        <!-- <DotLoader /> -->
+        <!-- <ContentList :articles="posts" class="mt-10" /> -->
+        <QueryContentList :query="query" :fromPage="`/blog/tag/${tag}`" :page="page" />
+
     </MainContainer>
 </template>
 
 <script setup>
 import MainContainer from '@/components/containers/MainContaienr.vue';
 import QueryContentList from '@/components/containers/QeuryContetListSection.vue';
-// import DotLoader from '@/components/display/DotLoader.vue';
 
 const route = useRoute()
 const tag = ref(route.params ? route.params.slug[0] : null);
-console.log('tag slug page::', route)
+console.log('/blog/tag/[...slug].vue ::', route, route.params.slug)
 
 const page = computed(() => {
     if (route.params.slug && route.params.slug.length > 1) {
-        console.log('slug > 1:::', route.params.slug)
-        return Number(route.params.slug[1]);
+        return Number(route.params.slug[2]);
     } else {
         return 1;
     }
@@ -32,7 +33,7 @@ const query = computed(() => {
     const newQuery = { draft: false }
     if (tag.value) {
         newQuery.tags = {}
-        newQuery.tags.$contains = [tag.value]
+        newQuery.tags.$contains = [tag.value];
     }
     console.log(newQuery)
     return newQuery;
@@ -42,13 +43,13 @@ const query = computed(() => {
 </script>
 
 <style scoped>
-.tag-page-title {
+.category-page-title {
     font-size: 1.7em;
     font-weight: 400;
     color: rgb(var(--v-theme-baseVariant));
 }
 
-.tag-page-title .tag-emphasis {
+.category-page-title .category-emphasis {
     font-weight: 500;
     color: rgb(var(--v-theme-primary));
 }
