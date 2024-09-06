@@ -3,7 +3,7 @@ title: 'My third blog post.'
 description: 'meta description of the page. meta description of the page. meta description of the page. meta description of the page. meta description of the page. meta description of the page meta description of the page meta description of the page meta description of the page meta description of the page'
 author: 'cinxini'
 dates:
-    published: "2024-09-02"
+    published: "2024-08-02"
 cover:
 draft: false
 category: datasci
@@ -13,7 +13,7 @@ tags: ["sample", "test"]
 
 ## My 3rd blog post
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam accumsan, orci non tristique sodales, est dui accumsan nulla, vitae lobortis ligula lectus vitae ligula. Vivamus lacus lacus, dapibus aliquam pulvinar ac, egestas sed dui. Integer gravida fringilla quam, a tincidunt tortor gravida ultrices. Pellentesque quis aliquet libero. Morbi sit amet arcu nisi. Donec eleifend sit amet urna ut sollicitudin. Aliquam erat volutpat. Integer dignissim mattis sapien pretium finibus. Etiam sed eros augue. Vestibulum velit dolor, convallis sed luctus in, lacinia id ante. Proin ut fringilla est, id sagittis justo. Sed vel eros sit amet libero rutrum semper.
-
+content/blog/202409/my-new-post-of-september
 ------
 
 # Links
