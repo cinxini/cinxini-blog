@@ -16,6 +16,11 @@ export default defineNuxtPlugin((nuxtApp) => {
           themes: {
             candyTheme,
           },
+          variations: {
+            colors: ['primary', 'base'],
+            lighten: 3,
+            darken: 3,
+          },
         },
         icons: {
             defaultSet: 'fa',
