@@ -7,7 +7,7 @@ dates:
 cover: "/images/blog/sample-cover.png"
 draft: false
 category: webdev
-featured: false
+featured: true
 tags: ["sample", "test"]
 ---
 

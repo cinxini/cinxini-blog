@@ -1,14 +1,14 @@
 ---
-title: 'My first blog post.'
-description: 'meta description of the page'
+title: 'My July'
+description: 'meta description of the new page'
 author: 'cinxini'
 dates:
-    published: "2024-08-31"
+    published: "2024-07-04"
 cover: "/images/blog/sample-cover.png"
 draft: false
 category: webdev
-featured: true
-tags: ["sample", "test"]
+featured: false
+tags: ["sample", "test", 'example']
 ---
 # My first blog post
 ## H2 Title

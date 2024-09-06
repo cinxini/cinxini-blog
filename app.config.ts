@@ -1,5 +1,7 @@
 export default defineAppConfig({
     baseUrl: "https://cinxini.com",
+    maxFeatured: 3,
+    maxRecent: 6,
     maxPostPerPage: 2,
     intersectObsThreshold: 1.0,
     intersectObsIds: ".md-style h2[id]",
