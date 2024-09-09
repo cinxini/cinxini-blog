@@ -1,5 +1,5 @@
 <template>
-  <div class="d-flex flex-row ga-1 align-center">
+  <div class="d-flex flex-row ga-1 align-center flex-wrap">
     <v-icon icon="fa-solid fa-tags" size="x-small" color="secondary" />
     <div v-for="tag in tags" :key="tag">
       <v-hover>

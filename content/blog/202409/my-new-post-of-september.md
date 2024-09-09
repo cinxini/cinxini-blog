@@ -8,7 +8,7 @@ cover: "/images/blog/sample-cover.png"
 draft: false
 category: webdev
 featured: true
-tags: ["sample", "test", 'example']
+tags: ["sample", "test", 'example', 'tutorial']
 ---
 # My first blog post
 ## H2 Title
