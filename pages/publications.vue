@@ -1,8 +1,11 @@
 <template>
   <MainContainer>
-    <SectionTitle title="Home" icon="fa-solid fa-house" />
+    <SectionTitle
+      title="Publications"
+      icon="fa-solid fa-book"
+    />
     <ArticleBody class="poppins my-4 main-background">
-      <ContentDoc path="/home" />
+      <ContentDoc path="/publications" />
     </ArticleBody>
   </MainContainer>
 </template>
